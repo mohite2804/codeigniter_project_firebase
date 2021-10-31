@@ -4,8 +4,10 @@
       <script src="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/datatables/jquery.dataTables.min.js"></script>
       <script src="<?php echo base_url() . ADMIN_CSS_JS; ?>plugins/datatables/dataTables.bootstrap.min.js"></script>
       <script>
-        $(function() {
-          $("#example1").DataTable();
+        $(document).ready(function() {
+          $('#example1').DataTable( {
+              "scrollX": true
+          } );
         });
       </script>
 
@@ -36,6 +38,9 @@
               <div class="box">
                 <div class="box-header">
 
+          
+
+
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="example1" class="table table-bordered table-striped">
@@ -43,9 +48,21 @@
                       <tr>
                         <th class="col-xs-1">No.</th>
                         <th class="col-xs-1">Driver Name</th>
-                        <th class="col-xs-1">DRN</th>
-                        <th class="col-xs-1">Category</th>
                         <th class="col-xs-2">Mobile</th>
+                        <th class="col-xs-1">Vehicle Category</th>
+                        <th class="col-xs-1">Vehicle no</th>
+                        <th class="col-xs-1">DRN</th>
+                        <th class="col-xs-1">DRN F img</th>
+                        <th class="col-xs-1">DRN B img</th>
+
+                        <th class="col-xs-2">Adhar img</th>
+                        <th class="col-xs-2">RC F img</th>
+                        <th class="col-xs-2">RC B img</th>
+                        <th class="col-xs-2">Insurance img</th>
+                        <th class="col-xs-2">Bank account no</th>
+                        <th class="col-xs-2">IFSC</th>
+                        
+                        
                         <th class="col-xs-2">Status</th>
                         <th class="col-xs-1">Action</th>
                       </tr>
@@ -57,9 +74,29 @@
                           <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo str_replace('"', '', $row['Driver Name']); ?></td>
-                            <td><?php echo str_replace('"', '', $row['DRN']); ?></td>
-                            <td><?php echo str_replace('"', '', $row['Category']); ?></td>
                             <td><?php echo str_replace('"', '', $row['Mobile']); ?></td>
+                            <td><?php echo str_replace('"', '', $row['Category']); ?></td>
+
+                            <td><?php echo str_replace('"', '', $row['Vehicle number']); ?></td>
+
+                           
+
+                            <td><?php echo str_replace('"', '', $row['DRN']); ?></td>
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row['DRN F']); ?>" /></td>
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row['DRN B']); ?>" /></td>
+
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row['Adhar']); ?>" /></td>
+
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row['RC F']); ?>" /></td>
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row['RC B']); ?>" /></td>
+
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row['Insurance']); ?>" /></td>
+                            
+                            <td><?php echo str_replace('"', '', $row['Bank Account']); ?></td>
+                            <td><?php echo str_replace('"', '', $row['Bank IFSC']); ?></td>
+
+                            
+                           
                             <td><?php echo isset($row['Status']) ?  str_replace('"', '', $row['Status']) : 'Not Approve'; ?></td>
                             <td>
                              <?php if(!isset($row['Status'])){?>
@@ -73,7 +110,7 @@
                       <?php } ?>
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                     <th class="col-xs-1">No.</th>
                         <th class="col-xs-1">Driver Name</th>
                         <th class="col-xs-1">DRN</th>
@@ -81,7 +118,7 @@
                         <th class="col-xs-2">Mobile</th>
                         <th class="col-xs-2">Status</th>
                         <th class="col-xs-1">Action</th>
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

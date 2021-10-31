@@ -66,12 +66,12 @@
                       <?php } ?>
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                       <th class="col-xs-1">No.</th>
                       <th class="col-xs-2">Full Name</th>
                       <th class="col-xs-1">Email</th>
                       <th class="col-xs-1">Mobile No</th>
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

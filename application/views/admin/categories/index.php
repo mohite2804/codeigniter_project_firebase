@@ -17,7 +17,7 @@
             Category
 
           </h1>
-          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg');?></h3>
+          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_remove_category');?></h3>
           <ol class="breadcrumb">
 
             <li style="margin-right: 10px;margin-top: -8px;">
@@ -58,7 +58,12 @@
                             <td><?php echo $i; ?></td>
 
                             <td><?php echo str_replace('"', '', $key); ?></td>
-                            <td><image src="<?php echo $row; ?>" /></td>
+                           
+
+                         
+
+                           
+                            <td><image style="width: 100px; height:100px;" src="<?php echo str_replace('"', '', $row); ?>" /></td>
                             <td>
                             <a title="Delete Category" onclick="return confirm('Are you sure you want to delete?')" href="<?php echo base_url().'Admin/removeCategory/'.  base64_encode(urlencode($key)) ;?>" ><i class="glyphicon glyphicon-remove"></i></a>
                               
@@ -69,14 +74,14 @@
                       <?php } ?>
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                       <th class="col-xs-1">No.</th>
 
                       <th class="col-xs-6">Category Name</th>
                       <th class="col-xs-6">Image</th>
 
                       <th class="col-xs-1">Action</th>
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

@@ -97,8 +97,23 @@ class Main_Model extends CI_Model {
 		return $result = $this->database->getReference('SERVICES')->getChild('CATEGORY')->getChild($key)->remove();			
 	}
 
-	function getSubCategories(){
-		$result = $this->database->getReference('SERVICES')->getValue();	
+	function findCategoryByKey($selected_category,$result){	
+
+		$result_new = array();
+		if (array_key_exists($selected_category, $result['CATEGORY'])) {
+			$result_new[$selected_category] = $result['CATEGORY'][$selected_category];
+		}
+		return $result_new;
+	}
+
+	function getSubCategories($selected_category = ""){
+		$result = $this->database->getReference('SERVICES')->getValue();
+
+		if($selected_category){
+			$result['CATEGORY_NEW']  = $this->findCategoryByKey($selected_category,$result);
+		}
+		
+
 		$categories = array();
 		$sub_categories = array();
 		$sub_categories_new = array();
@@ -127,25 +142,45 @@ class Main_Model extends CI_Model {
 
 		}
 
-		
+	//	echo "<pre>"; print_r($sub_categories); exit;
 
 		if($sub_categories){
 			$k = 0;
 			foreach($sub_categories as $key => $row){
 				if($row['sub_category']){
 					foreach($row['sub_category'] as $sub_key => $sub_row){
-						$sub_categories_new[$k][] = $row['category'];
-						$sub_categories_new[$k][] = $sub_key;
-						
-						
 
-						$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Charges'];
-						
-						$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Image'] ;
-						$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Description'] ;
-						$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Name'] ;
+						if($selected_category){
+							if($selected_category == $row['category'] ){
 
-						$k++;
+							
+								$sub_categories_new[$k][] = $row['category'];
+								$sub_categories_new[$k][] = $sub_key;
+								$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Charges'];
+								
+								$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Image'] ;
+								$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Description'] ;
+								$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Name'] ;
+
+								$k++;
+							}
+
+						}else{
+							$sub_categories_new[$k][] = $row['category'];
+							$sub_categories_new[$k][] = $sub_key;
+							
+							
+
+							$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Charges'];
+							
+							$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Image'] ;
+							$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Description'] ;
+							$sub_categories_new[$k][] = $result[$row['category']][$sub_key]['Name'] ;
+
+							$k++;
+						}
+						
+						
 					}
 				}
 			}

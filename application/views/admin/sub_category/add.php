@@ -18,11 +18,11 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Add Category
+			Add Vehicle
 
 		</h1>
-		<h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg'); ?></h3>
-		<a style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;" href="<?php echo base_url() . "Admin/getCategories"; ?>"> Back</a>
+		<h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_sub_category'); ?></h3>
+		<a style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;" href="<?php echo base_url() . "Admin/getSubCategories"; ?>"> Back</a>
 
 	</section>
 
@@ -44,11 +44,11 @@
 							<div class="box-body">
 
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Select Category</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Select Service</label>
 									<div class="col-sm-10">
 										<select class="form-control" name="selected_category">
 											<?php if ($categories) { ?>
-												<option value="">Select Category</option>
+												<option value="">Select Service</option>
 												<?php foreach ($categories as $key => $row) { ?>
 													<option value="<?php echo $row; ?>"><?php echo $row; ?></option>
 												<?php } ?>
@@ -60,7 +60,7 @@
 								</div>
 
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Sub Category</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Add New Vehicle</label>
 									<div class="col-sm-10">
 										<input name="subcategory" value="" class="form-control">
 										<?php echo form_error('subcategory'); ?>

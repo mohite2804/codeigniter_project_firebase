@@ -12,47 +12,49 @@
 
             </div>
           </div>
-          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <!-- sidebar menu: : style can be found in sidebar.less --> 
+          <!-- class="active" -->
           <ul class="sidebar-menu">
 
-            <li class="active treeview">
+            <li class="<?php echo ($this->uri->segment(2) == 'dashboard') ? 'active' : '' ?>" >
               <a href="<?php echo base_url() . 'Admin/dashboard'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Dashboard   </span> 
               </a>
             </li>
 
-            <li class="treeview">
+            
+            <li class="<?php echo ($this->uri->segment(2) == 'usersManagement') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/usersManagement'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Users</span> 
               </a>
             </li>
 
            
 
-            <li class="treeview">
+            <li class="<?php echo ($this->uri->segment(2) == 'getCategories') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/getCategories'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Category</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Add/Remove Services</span>
               </a>
             </li>
 
-            <li class="treeview">
+            <li  class="<?php echo ($this->uri->segment(2) == 'getSubCategories') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/getSubCategories'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Subcategory</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Add/Remove Vehicle </span> 
               </a>
             </li>
 
 
 
-            <li class="treeview">
+            <li  class="<?php echo ($this->uri->segment(2) == 'getOrders') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/getOrders'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Ongoing Orders</span> 
               </a>
             </li>
 
 
-            <li class="treeview">
+            <li  class="<?php echo ($this->uri->segment(2) == 'getDriverApplications') ? 'active' : '' ?>">
               <a href="<?php echo base_url() . 'Admin/getDriverApplications'; ?>">
-                <i class="fa fa-dashboard"></i> <span>Driver Application</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-dashboard"></i> <span>Driver Applications</span> 
               </a>
             </li>
 

@@ -21,7 +21,7 @@
 			Add Category
 
 		</h1>
-		<h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg');?></h3>
+		<h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_add_category');?></h3>
 		<a style="float:right; margin-right: 23px;margin-top: -24px;font-size: 20px;" href="<?php echo base_url() . "Admin/getCategories"; ?>"> Back</a>
 
 	</section>
@@ -44,7 +44,7 @@
 							<div class="box-body">
 
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Select Category</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">Add new Category</label>
 									<div class="col-sm-10">
 										<input name="selected_category" value="" class="form-control">
 										<?php echo form_error('selected_category'); ?>

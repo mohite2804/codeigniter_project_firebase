@@ -17,7 +17,7 @@
             Order Management
 
           </h1>
-          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg');?></h3>
+          <h3 class="box-title suc_msg_hide"><?php echo $this->session->flashdata('suc_msg_assign_driver');?></h3>
           <ol class="breadcrumb">
 
             <!-- <li style="margin-right: 10px;margin-top: -8px;">
@@ -81,7 +81,7 @@
                       <?php } ?>
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                       <th class="col-xs-1">No.</th>
                       <th class="col-xs-2">Full Name</th>
                       <th class="col-xs-1">Mobile No</th>
@@ -91,7 +91,7 @@
                       <th class="col-xs-1">Vehicle</th>
                       <th class="col-xs-1">Status</th>
                       <th class="col-xs-1">Action</th>
-                    </tfoot>
+                    </tfoot> -->
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

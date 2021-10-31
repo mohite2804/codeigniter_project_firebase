@@ -21,9 +21,29 @@ class Admin extends CI_Controller {
 		
 	}
 
+	public function dashboard(){
+
+		 $result =  $this->database->getReference('USERS')->getValue();	
+		 $data['total_user']  = count($result);
+
+		 $result =  $this->database->getReference('ORDERS')->getValue();	
+		 $data['total_orders']  = count($result);
+
+		 $result =  $this->database->getReference('DELIVERY BOY')->getChild('BOYS')->getValue();	
+		 $data['total_drivers']  = count($result);
+
+		 $result =  $this->database->getReference('ORDERS')->getValue();	
+		 $data['pending_orders']  = count($result);
+
+		//echo "<pre>"; print_r($data); exit;
+	
+		$data['main_contain'] = 'admin/dashboard/index';
+		$this->load->view('admin/includes/template',$data);
+	}
+
 	public function usersManagement(){
 		$data['result'] = $this->Main_Model->getUsers();
-		//echo "<pre>"; print_r($data); exit;
+		
 		$data['main_contain'] = 'admin/users/index';
 		$this->load->view('admin/includes/template',$data);
 	}
@@ -50,9 +70,9 @@ class Admin extends CI_Controller {
 		// /echo "<pre>"; print_r($key); exit;
 		$last_id = $this->Main_Model->approveDriver($key);
 		if($last_id){						
-			$this->session->set_flashdata('suc_msg', "<span style='color:green' >Driver Approve Succefully.</span>");
+			$this->session->set_flashdata('suc_msg_approve_driver', "<span style='color:green' >Driver Approve Succefully.</span>");
 		}else{
-			$this->session->set_flashdata('suc_msg', "<span style='color:red' >Driver Approve Not Succefully.</span>");
+			$this->session->set_flashdata('suc_msg_approve_driver', "<span style='color:red' >Driver Approve Not Succefully.</span>");
 		}	
 		redirect(base_url().'Admin/getDriverApplications');
 	}
@@ -74,9 +94,9 @@ class Admin extends CI_Controller {
 			
 				$last_id = $this->Main_Model->assignDriver($driver,$push_data,$order_id,$order_push_data);
 				if($last_id){						
-					$this->session->set_flashdata('suc_msg', "<span style='color:green' >Driver Assign Succefully.</span>");
+					$this->session->set_flashdata('suc_msg_assign_driver', "<span style='color:green' >Driver Assign Succefully.</span>");
 				}else{
-					$this->session->set_flashdata('suc_msg', "<span style='color:red' >Driver Assign Not Succefully.</span>");
+					$this->session->set_flashdata('suc_msg_assign_driver', "<span style='color:red' >Driver Assign Not Succefully.</span>");
 				}			
 				
 			}
@@ -113,9 +133,9 @@ class Admin extends CI_Controller {
 				$value = base_url() . 'uploads/category/thumb/' .$new_name;
 				$last_id = $this->Main_Model->addCategory($key,$value);
 				if($last_id){						
-					$this->session->set_flashdata('suc_msg', "<span style='color:green' >Category Added Succefully.</span>");
+					$this->session->set_flashdata('suc_msg_add_category', "<span style='color:green' >Category Added Succefully.</span>");
 				}else{
-					$this->session->set_flashdata('suc_msg', "<span style='color:red' >Category Not Added Succefully.</span>");
+					$this->session->set_flashdata('suc_msg_add_category', "<span style='color:red' >Category Not Added Succefully.</span>");
 				}			
 				
 			}
@@ -130,9 +150,9 @@ class Admin extends CI_Controller {
 	function removeCategory($key){
 		$data = $this->Main_Model->removeCategory($key);
 		if($data)
-		   $this->session->set_flashdata('suc_msg', "<span style='color:green' >Category Deleted Succefully.</span>");
+		   $this->session->set_flashdata('suc_msg_remove_category', "<span style='color:green' >Category Deleted Succefully.</span>");
 	   else
-		   $this->session->set_flashdata('suc_msg', "<span style='color:red' >Category Deleted Unsuccefully.</span>");
+		   $this->session->set_flashdata('suc_msg_remove_category', "<span style='color:red' >Category Deleted Unsuccefully.</span>");
 		   
 		redirect(base_url().'Admin/getCategories');
 	}
@@ -140,7 +160,21 @@ class Admin extends CI_Controller {
 
 	function getSubCategories(){
 
-		$data['result'] = $this->Main_Model->getSubCategories();		
+		$selected_category = "";
+		if(!empty($this->input->post('submit'))){
+			$selected_category = $this->input->post('selected_category');
+			
+
+			$data['result'] = $this->Main_Model->getSubCategories($selected_category);
+		}else{
+			$data['result'] = $this->Main_Model->getSubCategories();	
+			$data['result']['subcategories'] = "";
+		}
+		$data['result']['selected_category'] = $selected_category;
+				
+	
+		
+	//	echo "<pre>"; print_r($data); exit;
 		$data['main_contain'] = 'admin/sub_category/index';
 		$this->load->view('admin/includes/template',$data);
 	}
@@ -179,9 +213,9 @@ class Admin extends CI_Controller {
 
 				$last_id = $this->Main_Model->addSubCategory($category,$subcategory,$post_data);
 				if($last_id){						
-					$this->session->set_flashdata('suc_msg', "<span style='color:green' >Sub Category Added Succefully.</span>");
+					$this->session->set_flashdata('suc_msg_sub_category', "<span style='color:green' >Sub Category Added Succefully.</span>");
 				}else{
-					$this->session->set_flashdata('suc_msg', "<span style='color:red' >Sub Category Not Added Succefully.</span>");
+					$this->session->set_flashdata('suc_msg_sub_category', "<span style='color:red' >Sub Category Not Added Succefully.</span>");
 				}			
 				
 			}
@@ -239,9 +273,9 @@ class Admin extends CI_Controller {
 	function removeSubCategory($category,$subcategory){		
 		$data = $this->Main_Model->removeSubCategory($category,$subcategory);
 		if($data)
-		   $this->session->set_flashdata('suc_msg', "<span style='color:green' >Sub Category Deleted Succefully.</span>");
+		   $this->session->set_flashdata('suc_msg_remove_subcat', "<span style='color:green' >Sub Category Deleted Succefully.</span>");
 	   else
-		   $this->session->set_flashdata('suc_msg', "<span style='color:red' >Sub Category Deleted Unsuccefully.</span>");
+		   $this->session->set_flashdata('suc_msg_remove_subcat', "<span style='color:red' >Sub Category Deleted Unsuccefully.</span>");
 		   
 		redirect(base_url().'Admin/getSubCategories');
 	}
@@ -304,12 +338,7 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/includes/template',$data);
 	}
 	
-	public function dashboard(){
-		//echo "dashboard";
-		//echo "<pre>"; print_r($_SESSION); exit;
-		$data['main_contain'] = 'admin/dashboard/index';
-		$this->load->view('admin/includes/template',$data);
-	}
+	
 	
 //-------------------------------------- user management start -------------------------------------------------
 	
